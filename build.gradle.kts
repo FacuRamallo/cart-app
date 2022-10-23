@@ -2,6 +2,8 @@ plugins {
 	id("org.springframework.boot") version "2.7.5"
 	id("io.spring.dependency-management") version "1.0.15.RELEASE"
 	java
+	application
+	id("idea")
 }
 
 group = "com.backend"
@@ -15,15 +17,25 @@ repositories {
 }
 
 dependencies {
+	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation ("org.springframework.boot:spring-boot-starter")
-	developmentOnly ("org.springframework.boot:spring-boot-devtools")
+	compileOnly ("org.springframework.boot:spring-boot-devtools")
 	annotationProcessor ("org.springframework.boot:spring-boot-configuration-processor")
-	testImplementation ("org.springframework.boot:spring-boot-starter-test") {
-		exclude(mapOf("group" to "org.junit.vintage", "module" to "junit-vintage-engine"))
-	}
+
+	implementation("javax.ws.rs:javax.ws.rs-api:2.1.1")
+	implementation("com.fasterxml.jackson.core:jackson-databind:2.14.0-rc2")
+
+	testImplementation ("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("io.rest-assured:spring-mock-mvc:5.2.0")
+	testImplementation("org.testcontainers:junit-jupiter:1.17.4")
+	testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.0")
+	testImplementation("org.junit.jupiter:junit-jupiter-params:5.9.0")
+	testImplementation("org.mockito:mockito-junit-jupiter:4.8.0")
+	testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.9.0")
+	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.0")
 }
 
-tasks.test {
+tasks.withType<Test> {
 	useJUnitPlatform()
 }
 
@@ -45,14 +57,16 @@ configurations["integrationTestsRuntimeOnly"].extendsFrom(configurations.testRun
 
 val integrationTests = task<Test>("integrationTests") {
 	description = "Runs integration tests."
-	group = "verification"
+	group = "com.backend"
 
 	testClassesDirs = sourceSets["integrationTests"].output.classesDirs
 	classpath = sourceSets["integrationTests"].runtimeClasspath
-	filter {
-		includeTestsMatching("ApplicationIntegrationTest")
-	}
+
 	shouldRunAfter("test")
 }
 
 tasks.check { dependsOn(integrationTests) }
+
+application {
+	mainClass.set("com.backend.cartapp.infrastructure.Application")
+}
