@@ -1,7 +1,7 @@
 package com.backend.cartapp;
 
 import com.backend.cartapp.domain.contracts.CartRepository;
-import com.backend.cartapp.infrastructure.controller.CreateCartDTO;
+import com.backend.cartapp.infrastructure.controller.CartDTO;
 import com.backend.cartapp.infrastructure.controller.ProductDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,9 +25,9 @@ class CreateCartFeature extends IntegrationTest {
         ProductDto productA = new ProductDto(123456L, "product description", 25.00d);
         ArrayList<ProductDto> productList = new ArrayList<>();
         productList.add(productA);
-        CreateCartDTO createCartDTO = new CreateCartDTO(productList);
+        CartDTO cartDTO = new CartDTO(productList);
 
-        String jsonCreateCartDTO = objectMapper.writeValueAsString(createCartDTO);
+        String jsonCreateCartDTO = objectMapper.writeValueAsString(cartDTO);
 
         RestAssuredMockMvc.given()
             .contentType(APPLICATION_JSON)
@@ -42,9 +42,9 @@ class CreateCartFeature extends IntegrationTest {
     @Test
     void  should_create_empty_cart() throws JsonProcessingException {
         ArrayList<ProductDto> productList = new ArrayList<>();
-        CreateCartDTO createCartDTO = new CreateCartDTO(productList);
+        CartDTO cartDTO = new CartDTO(productList);
 
-        String jsonCreateCartDTO = objectMapper.writeValueAsString(createCartDTO);
+        String jsonCreateCartDTO = objectMapper.writeValueAsString(cartDTO);
 
         RestAssuredMockMvc.given()
                 .contentType(APPLICATION_JSON)

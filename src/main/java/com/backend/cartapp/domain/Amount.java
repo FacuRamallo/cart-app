@@ -6,4 +6,12 @@ public class Amount {
     public Amount(Double value) {
         this.value = value;
     }
+
+    public Double getValue() {
+        return value;
+    }
+    @Override
+    public String toString() {
+        return "\""+this.value.toString()+"\"";
+    }
 }

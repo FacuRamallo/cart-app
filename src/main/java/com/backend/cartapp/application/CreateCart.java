@@ -21,7 +21,7 @@ public class CreateCart {
 
         cartRepository.add(cart);
 
-        return cart.getId().toString();
+        return cart.getId().id.toString();
     }
 
     private Cart cartFromCommand(CreateCartCommand createCartCommand) throws RuntimeException {

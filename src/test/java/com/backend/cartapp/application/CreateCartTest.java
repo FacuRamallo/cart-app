@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 public class CreateCartTest {
@@ -19,7 +20,7 @@ public class CreateCartTest {
     private final CreateCart createCart;
 
     public CreateCartTest() {
-        this.cartRepository = Mockito.mock(CartRepository.class);
+        this.cartRepository = mock(CartRepository.class);
         this.createCart = new CreateCart(cartRepository);
     }
 
@@ -33,6 +34,7 @@ public class CreateCartTest {
         CreateCartCommand createCartCommand = new CreateCartCommand(productList);
 
         createCart.execute(createCartCommand);
+
         verify(cartRepository).add(any(Cart.class));
     }
 

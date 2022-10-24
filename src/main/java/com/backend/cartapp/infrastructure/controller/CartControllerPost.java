@@ -2,14 +2,11 @@ package com.backend.cartapp.infrastructure.controller;
 
 import com.backend.cartapp.application.CreateCart;
 import com.backend.cartapp.application.CreateCartCommand;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
-import static org.springframework.http.HttpStatus.CREATED;
 
 @Controller
 public class CartControllerPost {
@@ -20,8 +17,8 @@ public class CartControllerPost {
     }
 
     @PostMapping("/cart")
-    public ResponseEntity<String> create(@RequestBody CreateCartDTO createCartDTO) {
-        CreateCartCommand command = commandFromDTO(createCartDTO);
+    public ResponseEntity<String> create(@RequestBody CartDTO cartDTO) {
+        CreateCartCommand command = commandFromDTO(cartDTO);
 
         String cartId = createCart.execute(command);
 
@@ -29,12 +26,12 @@ public class CartControllerPost {
                 .header("content-type","application/json")
                 .body("{" +
                         "\"result\"= \"Cart created\","+
-                        "\"cart-ID\"= "+cartId+","+
+                        "\"cart-ID\"= \""+cartId+"\","+
                         "}");
     }
 
-    private CreateCartCommand commandFromDTO(CreateCartDTO createCartDTO) {
-        return new CreateCartCommand(createCartDTO.productDtoList);
+    private CreateCartCommand commandFromDTO(CartDTO cartDTO) {
+        return new CreateCartCommand(cartDTO.productDtoList);
     }
 
     @ExceptionHandler({RuntimeException.class})

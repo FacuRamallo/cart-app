@@ -8,19 +8,19 @@ import java.util.UUID;
 
 public class Cart {
 
-    private UUID id;
+    private CartId id;
     private ArrayList<Product> productDtoList;
 
     public Cart(ArrayList<Product> productDtoList) {
-        this.id = UUID.randomUUID();
+        this.id = new CartId();
         this.productDtoList = productDtoList;
     }
 
-    public UUID getId() {
+    public CartId getId() {
         return id;
     }
 
-    public List<Product> getProductDtoList() {
+    public ArrayList<Product> getProductDtoList() {
         return productDtoList;
     }
 }

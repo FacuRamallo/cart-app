@@ -1,6 +1,7 @@
 package com.backend.cartapp.infrastructure.repository;
 
 import com.backend.cartapp.domain.Cart;
+import com.backend.cartapp.domain.CartId;
 import com.backend.cartapp.domain.Product;
 import com.backend.cartapp.domain.contracts.CartRepository;
 
@@ -10,20 +11,25 @@ import java.util.UUID;
 
 public class InMemoryCartRepository implements CartRepository {
 
-    private HashMap storage;
+    private HashMap<UUID,ArrayList<Product>> storage;
 
     public InMemoryCartRepository() {
-        this.storage = new HashMap<UUID, ArrayList<Product>>();
+        this.storage = new HashMap<>();
     }
 
     @Override
     public void add(Cart cart) {
-        storage.put(cart.getId(),cart.getProductDtoList());
+        storage.put(cart.getId().id,cart.getProductDtoList());
     }
 
     @Override
-    public boolean findBy(UUID cartId) {
-        return storage.containsKey(cartId);
+    public boolean findBy(CartId cartId) {
+        return storage.containsKey(cartId.id);
+    }
+
+    @Override
+    public ArrayList<Product> getBy(CartId cartId) {
+        return storage.get(cartId.id);
     }
 
 }

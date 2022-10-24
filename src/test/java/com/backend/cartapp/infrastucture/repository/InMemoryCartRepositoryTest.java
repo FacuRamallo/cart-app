@@ -16,7 +16,7 @@ public class InMemoryCartRepositoryTest {
     public void should_ad_new_cart() {
         InMemoryCartRepository repository = new InMemoryCartRepository();
 
-        Cart cart = new Cart(new ArrayList<Product>());
+        Cart cart = new Cart(new ArrayList<>());
 
         repository.add(cart);
 
