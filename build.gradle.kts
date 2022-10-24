@@ -1,3 +1,7 @@
+import org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED
+import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
+import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
+
 plugins {
 	id("org.springframework.boot") version "2.7.5"
 	id("io.spring.dependency-management") version "1.0.15.RELEASE"
@@ -23,7 +27,9 @@ dependencies {
 	annotationProcessor ("org.springframework.boot:spring-boot-configuration-processor")
 
 	implementation("javax.ws.rs:javax.ws.rs-api:2.1.1")
-	implementation("com.fasterxml.jackson.core:jackson-databind:2.14.0-rc2")
+	implementation("com.fasterxml.jackson.core:jackson-databind:2.13.3")
+	implementation("com.fasterxml.jackson.core:jackson-annotations:2.13.3")
+
 
 	testImplementation ("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.rest-assured:spring-mock-mvc:5.2.0")
@@ -37,6 +43,13 @@ dependencies {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+	testLogging {
+		events(PASSED, SKIPPED, FAILED)
+		exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+		showExceptions = true
+		showCauses = true
+		showStackTraces = true
+	}
 }
 
 sourceSets{
