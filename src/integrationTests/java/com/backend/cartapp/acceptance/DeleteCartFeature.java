@@ -24,6 +24,7 @@ import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.equalToIgnoringCase;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.springframework.http.HttpStatus.OK;
 
@@ -31,6 +32,7 @@ class DeleteCartFeature extends IntegrationTest {
 
     @Autowired
     CartRepository cartRepository;
+
     private ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
@@ -44,7 +46,8 @@ class DeleteCartFeature extends IntegrationTest {
 
         given().delete("/cart/{id}", Map.of("id", cart.getId().id.toString()))
                 .then()
-                .status(OK);
+                .status(OK)
+                .body("message",equalToIgnoringCase("Cart id="+cart.getId().id+" deleted"));
 
 
         assertFalse(cartRepository.findBy(cart.getId()));

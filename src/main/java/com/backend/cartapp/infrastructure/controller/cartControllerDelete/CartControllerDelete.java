@@ -1,6 +1,7 @@
 package com.backend.cartapp.infrastructure.controller.cartControllerDelete;
 
 import com.backend.cartapp.application.deleteCart.DeleteCart;
+import com.backend.cartapp.application.deleteCart.DeleteCartCommand;
 import com.backend.cartapp.application.getCart.CartResponseDTO;
 import com.backend.cartapp.application.getCart.GetCart;
 import com.backend.cartapp.application.getCart.GetCartCommand;
@@ -16,18 +17,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class CartControllerDelete {
-    private final DeleteCart getCart;
-
-    private final ObjectMapper objectMapper;
+    private final DeleteCart deleteCart;
 
     public CartControllerDelete(DeleteCart deleteCart) {
-        this.getCart = deleteCart;
-        this.objectMapper = new ObjectMapper();
+        this.deleteCart = deleteCart;
     }
 
     @DeleteMapping("/cart/{id}")
-    public void get(@PathVariable("id") String id)  {
+    public ResponseEntity<String> delete(@PathVariable("id") String id) throws CartNotFoundException {
+        DeleteCartCommand command = new DeleteCartCommand(id);
 
+        deleteCart.execute(command);
+        return ResponseEntity.ok()
+                .header("content-type","application/json")
+                .body("{"+
+                            "\"message\": \"Cart id="+command.getCartId()+" deleted\""+
+                        "}");
     }
 
 

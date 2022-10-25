@@ -1,7 +1,7 @@
 package com.backend.cartapp.infrastucture.repository;
 
 import com.backend.cartapp.domain.Cart;
-import com.backend.cartapp.domain.repository.InMemoryCartRepository;
+import com.backend.cartapp.infrastructure.repository.InMemoryCartRepository;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

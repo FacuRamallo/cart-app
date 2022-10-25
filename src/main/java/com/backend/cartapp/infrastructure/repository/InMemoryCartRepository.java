@@ -1,4 +1,4 @@
-package com.backend.cartapp.domain.repository;
+package com.backend.cartapp.infrastructure.repository;
 
 import com.backend.cartapp.domain.Cart;
 import com.backend.cartapp.domain.CartId;
@@ -37,6 +37,11 @@ public class InMemoryCartRepository implements CartRepository {
         ArrayList<Product> storageProductList = storage.get(cart.getId().id);
         storageProductList.addAll(cart.getProductList());
         storage.put(cart.getId().id, storageProductList);
+    }
+
+    @Override
+    public void delete(CartId cartId) {
+        storage.remove(cartId.id);
     }
 
 }

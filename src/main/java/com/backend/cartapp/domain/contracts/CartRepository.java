@@ -15,4 +15,6 @@ public interface CartRepository {
     ArrayList<Product> getBy(CartId cartId);
 
     void addProductsTo(Cart cart);
+
+    void delete(CartId cartId);
 }
