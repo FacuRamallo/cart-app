@@ -2,6 +2,7 @@ package com.backend.cartapp.infrastructure.configuration;
 
 import com.backend.cartapp.application.CreateCart;
 import com.backend.cartapp.application.GetCart;
+import com.backend.cartapp.application.UpdateCart;
 import com.backend.cartapp.domain.contracts.CartRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,5 +18,10 @@ public class ApplicationConfiguration {
     @Bean
     GetCart getCart(CartRepository cartRepository) {
         return new GetCart(cartRepository);
+    }
+
+    @Bean
+    UpdateCart updateCart(CartRepository cartRepository) {
+        return new UpdateCart(cartRepository);
     }
 }

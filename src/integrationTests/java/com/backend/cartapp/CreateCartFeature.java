@@ -36,7 +36,6 @@ class CreateCartFeature extends IntegrationTest {
             .then()
             .status(OK);
 
-
     }
 
     @Test
