@@ -1,26 +1,27 @@
 package com.backend.cartapp.domain;
 
-import com.backend.cartapp.infrastructure.controller.ProductDto;
-
 import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 public class Cart {
 
     private CartId id;
-    private ArrayList<Product> productDtoList;
+    private ArrayList<Product> productList;
 
     public Cart(ArrayList<Product> productDtoList) {
         this.id = new CartId();
-        this.productDtoList = productDtoList;
+        this.productList = productDtoList;
+    }
+
+    public Cart(CartId id, ArrayList<Product> productDtoList) {
+        this.id = id;
+        this.productList = productDtoList;
     }
 
     public CartId getId() {
         return id;
     }
 
-    public ArrayList<Product> getProductDtoList() {
-        return productDtoList;
+    public ArrayList<Product> getProductList() {
+        return productList;
     }
 }

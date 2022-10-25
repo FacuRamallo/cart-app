@@ -2,6 +2,7 @@ package com.backend.cartapp.infrastructure.controller;
 
 import com.backend.cartapp.application.UpdateCart;
 import com.backend.cartapp.application.UpdateCartCommand;
+import com.backend.cartapp.domain.exceptions.CartNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,7 @@ public class CartControllerPut {
     }
 
     @PutMapping("/cart")
-    public ResponseEntity<String> update(@RequestBody UpdateCartDTO updateCartDTO) {
+    public ResponseEntity<String> update(@RequestBody UpdateCartDTO updateCartDTO) throws CartNotFoundException {
         UpdateCartCommand command = commandFromDTO(updateCartDTO);
 
          updateCart.execute(command);
@@ -22,8 +23,7 @@ public class CartControllerPut {
         return ResponseEntity.ok()
                 .header("content-type","application/json")
                 .body("{" +
-                        "\"result\": \"cart updated correctly\","+
-                        "\"cart-ID\": \""+""+"\","+
+                        "\"result\": \"cart updated correctly\""+
                         "}");
     }
 
@@ -31,7 +31,7 @@ public class CartControllerPut {
         return new UpdateCartCommand(updateCartDTO.cartId, updateCartDTO.productDtoList);
     }
 
-    @ExceptionHandler({RuntimeException.class})
+    @ExceptionHandler({RuntimeException.class, CartNotFoundException.class})
     public ResponseEntity<String> handleException(RuntimeException exception){
         return ResponseEntity.badRequest()
                 .header("content-type","application/json")

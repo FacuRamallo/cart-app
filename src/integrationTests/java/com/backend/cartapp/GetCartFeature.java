@@ -33,7 +33,7 @@ public class GetCartFeature extends IntegrationTest {
 
         cartRepository.add(cart);
 
-        CartResponseDTO expectedCartDto = mapToCartDto(cart.getId(),cart.getProductDtoList());
+        CartResponseDTO expectedCartDto = mapToCartDto(cart.getId(),cart.getProductList());
 
         given().get("/cart/{id}", Map.of("id", cart.getId().id.toString()))
                 .then()

@@ -1,14 +1,13 @@
 package com.backend.cartapp;
 
 import com.backend.cartapp.domain.*;
+import com.backend.cartapp.domain.contracts.CartRepository;
 import com.backend.cartapp.domain.exceptions.InvalidDescriptionException;
-import com.backend.cartapp.infrastructure.controller.CartDTO;
 import com.backend.cartapp.infrastructure.controller.ProductDto;
 import com.backend.cartapp.infrastructure.controller.UpdateCartDTO;
 import com.backend.cartapp.infrastructure.repository.InMemoryCartRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -25,18 +24,13 @@ import static org.springframework.http.HttpStatus.OK;
 public class UpdateCartFeature extends IntegrationTest {
 
     @Autowired
-    private InMemoryCartRepository cartRepository;
+    private CartRepository cartRepository;
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
     public void should_add_products_to_an_existing_cart() throws JsonProcessingException, InvalidDescriptionException {
-        Product productA = new Product(new ProductId(654321L),new Description("product description"),new Amount(50.00d));
-        ArrayList<Product> productList = new ArrayList<>();
-        productList.add(productA);
-        Cart cart = new Cart(productList);
-
-        cartRepository.add(cart);
+        Cart cart = createCart();
 
         String cartId = cart.getId().id.toString();
         ProductDto productToAdd = new ProductDto(123456L, "product description", 25.00d);
@@ -55,6 +49,15 @@ public class UpdateCartFeature extends IntegrationTest {
             .body("result",equalToIgnoringCase("cart updated correctly"));
 
         assertEquals(2, cartRepository.getBy(cart.getId()).size());
+    }
+
+    private Cart createCart() throws InvalidDescriptionException {
+        Product productA = new Product(new ProductId(654321L),new Description("product description"),new Amount(50.00d));
+        ArrayList<Product> productList = new ArrayList<>();
+        productList.add(productA);
+        Cart cart = new Cart(productList);
+        cartRepository.add(cart);
+        return cart;
     }
 
 }

@@ -17,4 +17,8 @@ public class UpdateCartCommand {
     public List<ProductDto> getProductDtoList() {
         return productDtoList;
     }
+
+    public String getCartId() {
+        return cartId;
+    }
 }

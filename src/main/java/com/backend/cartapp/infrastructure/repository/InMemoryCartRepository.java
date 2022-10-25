@@ -19,7 +19,7 @@ public class InMemoryCartRepository implements CartRepository {
 
     @Override
     public void add(Cart cart) {
-        storage.put(cart.getId().id,cart.getProductDtoList());
+        storage.put(cart.getId().id,cart.getProductList());
     }
 
     @Override
@@ -30,6 +30,13 @@ public class InMemoryCartRepository implements CartRepository {
     @Override
     public ArrayList<Product> getBy(CartId cartId) {
         return storage.get(cartId.id);
+    }
+
+    @Override
+    public void addProductsTo(Cart cart) {
+        ArrayList<Product> storageProductList = storage.get(cart.getId().id);
+        storageProductList.addAll(cart.getProductList());
+        storage.put(cart.getId().id, storageProductList);
     }
 
 }

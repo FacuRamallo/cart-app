@@ -2,6 +2,7 @@ package com.backend.cartapp.application;
 
 import com.backend.cartapp.domain.*;
 import com.backend.cartapp.domain.contracts.CartRepository;
+import com.backend.cartapp.domain.exceptions.CartNotFoundException;
 import com.backend.cartapp.domain.exceptions.InvalidDescriptionException;
 import com.backend.cartapp.infrastructure.controller.ProductDto;
 
@@ -16,15 +17,21 @@ public class UpdateCart {
         this.cartRepository = cartRepository;
     }
 
-    public void execute(UpdateCartCommand command) throws RuntimeException {
+    public void execute(UpdateCartCommand command) throws RuntimeException, CartNotFoundException {
 
-        ArrayList<Product> productsToAdd = cartFromCommand(command);
+        CartId cartId = new CartId(command.getCartId());
+        ArrayList<Product> productsToAdd = productsFromCommand(command);
 
+        Cart cartToUpdate = new Cart(cartId, productsToAdd);
+        Boolean cartExist = cartRepository.findBy(cartToUpdate.getId());
+        if(!cartExist) throw new CartNotFoundException(cartId.id.toString());
+
+        cartRepository.addProductsTo(cartToUpdate);
 
     }
 
-    private ArrayList<Product> cartFromCommand(UpdateCartCommand updateCartCommand) throws RuntimeException {
-        ArrayList<Product> productsToAdd = updateCartCommand.getProductDtoList().stream().
+    private ArrayList<Product> productsFromCommand(UpdateCartCommand updateCartCommand) throws RuntimeException {
+        return updateCartCommand.getProductDtoList().stream().
                 map(productDto -> {
                     try {
                         return getProductFromDTO(productDto);
@@ -32,8 +39,6 @@ public class UpdateCart {
                         throw new RuntimeException(e.getMessage(),e.initCause(e.getCause()));
                     }
                 }).collect(Collectors.toCollection(ArrayList::new));
-
-        return productsToAdd;
     }
 
     private Product getProductFromDTO(ProductDto productDto) throws InvalidDescriptionException {

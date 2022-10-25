@@ -13,4 +13,6 @@ public interface CartRepository {
     boolean findBy(CartId cartId);
 
     ArrayList<Product> getBy(CartId cartId);
+
+    void addProductsTo(Cart cart);
 }
