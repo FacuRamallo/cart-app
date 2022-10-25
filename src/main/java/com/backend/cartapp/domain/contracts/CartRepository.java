@@ -19,4 +19,6 @@ public interface CartRepository {
     void delete(CartId cartId);
 
     int getCartsQuantity();
+
+    void truncate();
 }

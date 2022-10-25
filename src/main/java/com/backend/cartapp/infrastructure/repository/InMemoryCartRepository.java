@@ -6,15 +6,15 @@ import com.backend.cartapp.domain.Product;
 import com.backend.cartapp.domain.contracts.CartRepository;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class InMemoryCartRepository implements CartRepository {
 
-    private HashMap<UUID,ArrayList<Product>> storage;
+    private ConcurrentHashMap<UUID,ArrayList<Product>> storage;
 
     public InMemoryCartRepository() {
-        this.storage = new HashMap<>();
+        this.storage = new ConcurrentHashMap<>();
     }
 
     @Override
@@ -46,6 +46,10 @@ public class InMemoryCartRepository implements CartRepository {
 
     public int getCartsQuantity(){
         return this.storage.size();
+    }
+
+    public void truncate() {
+        this.storage.clear();
     }
 
 }

@@ -4,17 +4,14 @@ import com.backend.cartapp.domain.CartId;
 import com.backend.cartapp.domain.contracts.CartRepository;
 
 public class DeleteCartTask implements Runnable {
-    private static final long start;
+    private final long start;
     private final CartId cartId;
     private long execStart;
 
     private CartRepository cartRepository;
 
-    static {
-        start = System.currentTimeMillis();
-    }
-
     public DeleteCartTask(CartId cartId, CartRepository cartRepository) {
+        this.start = System.currentTimeMillis();
         this.cartId = cartId;
         this.cartRepository = cartRepository;
     }
@@ -27,12 +24,8 @@ public class DeleteCartTask implements Runnable {
     }
 
     private void printTaskInfo() {
-        String builder = "Key -> " +
-                cartId.id +
-                " - deleted - Exec before: " +
-                (execStart - start);
-
-        System.out.println(builder);
+        String info = "Key -> " + cartId.id + " - deleted after: " + (execStart - start)/1000 +" seg.";
+        System.out.println(info);
     }
 }
 

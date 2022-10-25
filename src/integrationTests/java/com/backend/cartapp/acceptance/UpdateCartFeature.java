@@ -1,33 +1,26 @@
 package com.backend.cartapp.acceptance;
 
 import com.backend.cartapp.IntegrationTest;
-import com.backend.cartapp.domain.*;
-import com.backend.cartapp.domain.contracts.CartRepository;
+import com.backend.cartapp.domain.Amount;
+import com.backend.cartapp.domain.Cart;
+import com.backend.cartapp.domain.Description;
+import com.backend.cartapp.domain.Product;
+import com.backend.cartapp.domain.ProductId;
 import com.backend.cartapp.domain.exceptions.InvalidDescriptionException;
 import com.backend.cartapp.infrastructure.controller.cartControllerGet.ProductDto;
 import com.backend.cartapp.infrastructure.controller.cartControllerPut.UpdateCartDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
-import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.equalToIgnoringCase;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.http.HttpStatus.OK;
 
 public class UpdateCartFeature extends IntegrationTest {
-
-    @Autowired
-    private CartRepository cartRepository;
-
-    private ObjectMapper objectMapper = new ObjectMapper();
-
     @Test
     public void should_add_products_to_an_existing_cart() throws JsonProcessingException, InvalidDescriptionException {
         Cart cart = createCart();

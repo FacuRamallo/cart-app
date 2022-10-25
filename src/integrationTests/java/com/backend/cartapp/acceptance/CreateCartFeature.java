@@ -1,14 +1,11 @@
 package com.backend.cartapp.acceptance;
 
 import com.backend.cartapp.IntegrationTest;
-import com.backend.cartapp.domain.contracts.CartRepository;
-import com.backend.cartapp.infrastructure.controller.cartControllerPost.CartDTO;
 import com.backend.cartapp.infrastructure.controller.cartControllerGet.ProductDto;
+import com.backend.cartapp.infrastructure.controller.cartControllerPost.CartDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 
@@ -16,10 +13,6 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static org.springframework.http.HttpStatus.OK;
 
 class CreateCartFeature extends IntegrationTest {
-
-    @Autowired
-    CartRepository cartRepository;
-    private ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
     void  should_create_cart() throws JsonProcessingException {
@@ -36,7 +29,6 @@ class CreateCartFeature extends IntegrationTest {
             .post("/cart")
             .then()
             .status(OK);
-
     }
 
     @Test
@@ -52,6 +44,5 @@ class CreateCartFeature extends IntegrationTest {
                 .post("/cart")
                 .then()
                 .status(OK);
-
     }
 }
