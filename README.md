@@ -1,7 +1,5 @@
-# cart-app
-Backend api for technic test
-
-## One Box Technic Test 
+# cart-app -Technical Test
+Backend api for technical test
 
 ### TO DO
 The test consist in create a back end application for an e-commerce,
