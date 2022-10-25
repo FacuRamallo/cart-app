@@ -1,5 +1,7 @@
 package com.backend.cartapp.application.createCart;
 
+import com.backend.cartapp.application.cartTimeToLive.DeleteCartAfterTLLScheduler;
+import com.backend.cartapp.application.cartTimeToLive.DeleteCartTask;
 import com.backend.cartapp.domain.Amount;
 import com.backend.cartapp.domain.Cart;
 import com.backend.cartapp.domain.Description;
@@ -13,10 +15,12 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class CreateCart {
-
     private final CartRepository cartRepository;
-    public CreateCart(CartRepository cartRepository) {
+
+    private final DeleteCartAfterTLLScheduler scheduler;
+    public CreateCart(CartRepository cartRepository, DeleteCartAfterTLLScheduler scheduler) {
         this.cartRepository = cartRepository;
+        this.scheduler = scheduler;
     }
 
     public String execute(CreateCartCommand command) throws RuntimeException {
@@ -24,6 +28,7 @@ public class CreateCart {
         Cart cart = cartFromCommand(command);
 
         cartRepository.add(cart);
+        scheduler.scheduleTask(new DeleteCartTask(cart.getId(),cartRepository));
 
         return cart.getId().id.toString();
     }

@@ -17,4 +17,6 @@ public interface CartRepository {
     void addProductsTo(Cart cart);
 
     void delete(CartId cartId);
+
+    int getCartsQuantity();
 }

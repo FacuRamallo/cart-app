@@ -1,5 +1,6 @@
 package com.backend.cartapp.application;
 
+import com.backend.cartapp.application.cartTimeToLive.DeleteCartAfterTLLScheduler;
 import com.backend.cartapp.application.createCart.CreateCart;
 import com.backend.cartapp.application.createCart.CreateCartCommand;
 import com.backend.cartapp.domain.Cart;
@@ -20,9 +21,12 @@ public class CreateCartTest {
     private final CartRepository cartRepository;
     private final CreateCart createCart;
 
+    private final DeleteCartAfterTLLScheduler deleteCartAfterTLLScheduler;
+
     public CreateCartTest() {
+        this.deleteCartAfterTLLScheduler = mock(DeleteCartAfterTLLScheduler.class);
         this.cartRepository = mock(CartRepository.class);
-        this.createCart = new CreateCart(cartRepository);
+        this.createCart = new CreateCart(cartRepository, deleteCartAfterTLLScheduler);
     }
 
 

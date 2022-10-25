@@ -44,4 +44,8 @@ public class InMemoryCartRepository implements CartRepository {
         storage.remove(cartId.id);
     }
 
+    public int getCartsQuantity(){
+        return this.storage.size();
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.backend.cartapp.infrastructure.configuration;
 
+import com.backend.cartapp.application.cartTimeToLive.DeleteCartAfterTLLScheduler;
 import com.backend.cartapp.application.createCart.CreateCart;
 import com.backend.cartapp.application.deleteCart.DeleteCart;
 import com.backend.cartapp.application.getCart.GetCart;
@@ -11,9 +12,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ApplicationConfiguration {
 
+    private final Long cartsTimeToLive = 3000L; //600000L 10 minutes in Milliseconds
     @Bean
-    CreateCart createCart(CartRepository cartRepository) {
-        return new CreateCart(cartRepository);
+    CreateCart createCart(CartRepository cartRepository, DeleteCartAfterTLLScheduler deleteCartAfterTLLScheduler) {
+        return new CreateCart(cartRepository, deleteCartAfterTLLScheduler);
     }
 
     @Bean
@@ -29,5 +31,10 @@ public class ApplicationConfiguration {
     @Bean
     DeleteCart deleteCart(CartRepository cartRepository) {
         return new DeleteCart(cartRepository);
+    }
+
+    @Bean
+    DeleteCartAfterTLLScheduler deleteCartAfterTLLScheduler() {
+        return new DeleteCartAfterTLLScheduler(cartsTimeToLive);
     }
 }
