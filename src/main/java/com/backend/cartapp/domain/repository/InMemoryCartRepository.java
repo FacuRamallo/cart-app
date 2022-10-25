@@ -1,4 +1,4 @@
-package com.backend.cartapp.infrastructure.repository;
+package com.backend.cartapp.domain.repository;
 
 import com.backend.cartapp.domain.Cart;
 import com.backend.cartapp.domain.CartId;
