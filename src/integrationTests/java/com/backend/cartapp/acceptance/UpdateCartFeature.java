@@ -1,11 +1,11 @@
-package com.backend.cartapp;
+package com.backend.cartapp.acceptance;
 
+import com.backend.cartapp.IntegrationTest;
 import com.backend.cartapp.domain.*;
 import com.backend.cartapp.domain.contracts.CartRepository;
 import com.backend.cartapp.domain.exceptions.InvalidDescriptionException;
-import com.backend.cartapp.infrastructure.controller.ProductDto;
-import com.backend.cartapp.infrastructure.controller.UpdateCartDTO;
-import com.backend.cartapp.infrastructure.repository.InMemoryCartRepository;
+import com.backend.cartapp.infrastructure.controller.cartControllerGet.ProductDto;
+import com.backend.cartapp.infrastructure.controller.cartControllerPut.UpdateCartDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;

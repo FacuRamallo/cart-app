@@ -1,9 +1,8 @@
-package com.backend.cartapp.infrastructure.controller;
+package com.backend.cartapp.infrastructure.controller.cartControllerGet;
 
-import com.backend.cartapp.application.CartResponseDTO;
-import com.backend.cartapp.application.GetCart;
-import com.backend.cartapp.application.GetCartCommand;
-import com.backend.cartapp.domain.Cart;
+import com.backend.cartapp.application.getCart.CartResponseDTO;
+import com.backend.cartapp.application.getCart.GetCart;
+import com.backend.cartapp.application.getCart.GetCartCommand;
 import com.backend.cartapp.domain.exceptions.CartNotFoundException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

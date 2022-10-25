@@ -1,6 +1,6 @@
-package com.backend.cartapp.application;
+package com.backend.cartapp.application.updateCart;
 
-import com.backend.cartapp.infrastructure.controller.ProductDto;
+import com.backend.cartapp.infrastructure.controller.cartControllerGet.ProductDto;
 
 import java.util.List;
 

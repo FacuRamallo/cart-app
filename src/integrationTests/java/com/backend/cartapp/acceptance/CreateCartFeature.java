@@ -1,8 +1,9 @@
-package com.backend.cartapp;
+package com.backend.cartapp.acceptance;
 
+import com.backend.cartapp.IntegrationTest;
 import com.backend.cartapp.domain.contracts.CartRepository;
-import com.backend.cartapp.infrastructure.controller.CartDTO;
-import com.backend.cartapp.infrastructure.controller.ProductDto;
+import com.backend.cartapp.infrastructure.controller.cartControllerPost.CartDTO;
+import com.backend.cartapp.infrastructure.controller.cartControllerGet.ProductDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;

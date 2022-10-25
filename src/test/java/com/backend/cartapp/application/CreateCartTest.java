@@ -1,11 +1,12 @@
 package com.backend.cartapp.application;
 
+import com.backend.cartapp.application.createCart.CreateCart;
+import com.backend.cartapp.application.createCart.CreateCartCommand;
 import com.backend.cartapp.domain.Cart;
 import com.backend.cartapp.domain.contracts.CartRepository;
 import com.backend.cartapp.domain.exceptions.InvalidDescriptionException;
-import com.backend.cartapp.infrastructure.controller.ProductDto;
+import com.backend.cartapp.infrastructure.controller.cartControllerGet.ProductDto;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.util.ArrayList;
 

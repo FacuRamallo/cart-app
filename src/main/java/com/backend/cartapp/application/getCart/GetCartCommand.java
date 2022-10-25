@@ -1,4 +1,4 @@
-package com.backend.cartapp.application;
+package com.backend.cartapp.application.getCart;
 
 public class GetCartCommand {
     private final String cartId;

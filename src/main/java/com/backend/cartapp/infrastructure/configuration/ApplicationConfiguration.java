@@ -1,8 +1,8 @@
 package com.backend.cartapp.infrastructure.configuration;
 
-import com.backend.cartapp.application.CreateCart;
-import com.backend.cartapp.application.GetCart;
-import com.backend.cartapp.application.UpdateCart;
+import com.backend.cartapp.application.createCart.CreateCart;
+import com.backend.cartapp.application.getCart.GetCart;
+import com.backend.cartapp.application.updateCart.UpdateCart;
 import com.backend.cartapp.domain.contracts.CartRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

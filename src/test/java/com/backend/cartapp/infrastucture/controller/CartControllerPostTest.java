@@ -1,11 +1,11 @@
 package com.backend.cartapp.infrastucture.controller;
 
-import com.backend.cartapp.application.CreateCart;
-import com.backend.cartapp.application.CreateCartCommand;
+import com.backend.cartapp.application.createCart.CreateCart;
+import com.backend.cartapp.application.createCart.CreateCartCommand;
 import com.backend.cartapp.domain.exceptions.InvalidDescriptionException;
-import com.backend.cartapp.infrastructure.controller.CartControllerPost;
-import com.backend.cartapp.infrastructure.controller.CartDTO;
-import com.backend.cartapp.infrastructure.controller.ProductDto;
+import com.backend.cartapp.infrastructure.controller.cartControllerPost.CartControllerPost;
+import com.backend.cartapp.infrastructure.controller.cartControllerPost.CartDTO;
+import com.backend.cartapp.infrastructure.controller.cartControllerGet.ProductDto;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 

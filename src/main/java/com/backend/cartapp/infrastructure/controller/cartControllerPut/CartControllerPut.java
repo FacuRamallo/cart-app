@@ -1,7 +1,7 @@
-package com.backend.cartapp.infrastructure.controller;
+package com.backend.cartapp.infrastructure.controller.cartControllerPut;
 
-import com.backend.cartapp.application.UpdateCart;
-import com.backend.cartapp.application.UpdateCartCommand;
+import com.backend.cartapp.application.updateCart.UpdateCart;
+import com.backend.cartapp.application.updateCart.UpdateCartCommand;
 import com.backend.cartapp.domain.exceptions.CartNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

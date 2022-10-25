@@ -1,5 +1,6 @@
-package com.backend.cartapp.infrastructure.controller;
+package com.backend.cartapp.infrastructure.controller.cartControllerPost;
 
+import com.backend.cartapp.infrastructure.controller.cartControllerGet.ProductDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

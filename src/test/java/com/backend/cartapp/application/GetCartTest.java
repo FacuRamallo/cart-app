@@ -1,10 +1,13 @@
 package com.backend.cartapp.application;
 
+import com.backend.cartapp.application.getCart.CartResponseDTO;
+import com.backend.cartapp.application.getCart.GetCart;
+import com.backend.cartapp.application.getCart.GetCartCommand;
 import com.backend.cartapp.domain.*;
 import com.backend.cartapp.domain.contracts.CartRepository;
 import com.backend.cartapp.domain.exceptions.CartNotFoundException;
 import com.backend.cartapp.domain.exceptions.InvalidDescriptionException;
-import com.backend.cartapp.infrastructure.controller.ProductDto;
+import com.backend.cartapp.infrastructure.controller.cartControllerGet.ProductDto;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

@@ -1,9 +1,9 @@
-package com.backend.cartapp.application;
+package com.backend.cartapp.application.createCart;
 
 import com.backend.cartapp.domain.*;
 import com.backend.cartapp.domain.contracts.CartRepository;
 import com.backend.cartapp.domain.exceptions.InvalidDescriptionException;
-import com.backend.cartapp.infrastructure.controller.ProductDto;
+import com.backend.cartapp.infrastructure.controller.cartControllerGet.ProductDto;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -28,7 +28,7 @@ public class CreateCart {
         ArrayList<Product> productList = createCartCommand.getProductDtoList().stream().
                 map(productDto -> {
                     try {
-                        return getProductFromDTO(productDto);
+                        return mapProductFromDTO(productDto);
                     } catch (InvalidDescriptionException e) {
                         throw new RuntimeException(e.getMessage(),e.initCause(e.getCause()));
                     }
@@ -37,7 +37,7 @@ public class CreateCart {
         return new Cart(productList);
     }
 
-    private Product getProductFromDTO(ProductDto productDto) throws InvalidDescriptionException {
+    private Product mapProductFromDTO(ProductDto productDto) throws InvalidDescriptionException {
         return new Product(
                 new ProductId(productDto.id),
                 new Description(productDto.description),
