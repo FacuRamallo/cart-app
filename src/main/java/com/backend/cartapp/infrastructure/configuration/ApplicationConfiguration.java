@@ -1,6 +1,7 @@
 package com.backend.cartapp.infrastructure.configuration;
 
 import com.backend.cartapp.application.createCart.CreateCart;
+import com.backend.cartapp.application.deleteCart.DeleteCart;
 import com.backend.cartapp.application.getCart.GetCart;
 import com.backend.cartapp.application.updateCart.UpdateCart;
 import com.backend.cartapp.domain.contracts.CartRepository;
@@ -23,5 +24,10 @@ public class ApplicationConfiguration {
     @Bean
     UpdateCart updateCart(CartRepository cartRepository) {
         return new UpdateCart(cartRepository);
+    }
+
+    @Bean
+    DeleteCart deleteCart(CartRepository cartRepository) {
+        return new DeleteCart(cartRepository);
     }
 }
